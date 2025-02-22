@@ -27,7 +27,7 @@ local Gravity = Instance.new("TextButton")
 local Speed = Instance.new("TextButton")
 local Jump = Instance.new("TextButton")
 local Btools = Instance.new("TextButton")
- 
+
 ZombieAttackGUI.Name = "Zombie Attack GUI"
 ZombieAttackGUI.Parent = game.CoreGui
 ZombieAttackGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -342,177 +342,218 @@ Btools.TextScaled = true
 Btools.TextSize = 14
 Btools.TextWrapped = true
 Btools.TextXAlignment = Enum.TextXAlignment.Left
--- scripts 
-Fly.MouseButton1Click:Connect(function()
-Console.Text = ("Press E to activate and deactivate flying mode\n\n ")
-wait(0.2)
-loadstring(game:HttpGet(('https://pastebin.com/raw/7rXZ9VNc'),true))()
-wait(5)
-Console.Text = ("Status: Ready To Use\n\n")
-end)
-
-Noclip.MouseButton1Click:connect(function()
-if Console.Text == "Toggle NoClip" then
-noclip = true
-Console.Text = "Toggle NoClip: On"
-        Console.TextColor3 = Color3.new(0,185,0)
-game:GetService('RunService').Stepped:connect(function()
-if noclip then
-game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
-                 end
-        end)
-    elseif Console.Text == "Toggle NoClip: On" then
-        noclip = false
-        Console.Text = "Toggle NoClip: Off"
-        Console.TextColor3 = Color3.new(170,0,0)
-elseif Console.Text == "Toggle NoClip: On" then
-    noclip = true
-Console.Text = "Toggle NoClip: On"
-        Console.TextColor3 = Color3.new(0,185,0)
+-- scripts
+Fly.MouseButton1Click:Connect(
+    function()
+        Console.Text = ("Press E to activate and deactivate flying mode\n\n ")
+        wait(0.2)
+        loadstring(game:HttpGet(("https://pastebin.com/raw/7rXZ9VNc"), true))()
+        wait(5)
+        Console.Text = ("Status: Ready To Use\n\n")
     end
-end)
+)
 
-Knifes.MouseButton1Click:connect(function()
-	for _,Thing in pairs(game.ReplicatedStorage.Knives:GetChildren()) do
-if Thing:IsA("Tool") then
-Thing.Parent = game.Players.LocalPlayer.Backpack
-end
-end
-end)
+Noclip.MouseButton1Click:connect(
+    function()
+        if Console.Text == "Toggle NoClip" then
+            noclip = true
+            Console.Text = "Toggle NoClip: On"
+            Console.TextColor3 = Color3.new(0, 185, 0)
+            game:GetService("RunService").Stepped:connect(
+                function()
+                    if noclip then
+                        game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+                    end
+                end
+            )
+        elseif Console.Text == "Toggle NoClip: On" then
+            noclip = false
+            Console.Text = "Toggle NoClip: Off"
+            Console.TextColor3 = Color3.new(170, 0, 0)
+        elseif Console.Text == "Toggle NoClip: On" then
+            noclip = true
+            Console.Text = "Toggle NoClip: On"
+            Console.TextColor3 = Color3.new(0, 185, 0)
+        end
+    end
+)
 
-Guns.MouseButton1Click:connect(function()
-	for _,Thing in pairs(game.ReplicatedStorage.Guns:GetChildren()) do
-if Thing:IsA("Tool") then
-Thing.Parent = game.Players.LocalPlayer.Backpack
-end
-end
-end)
+Knifes.MouseButton1Click:connect(
+    function()
+        for _, Thing in pairs(game.ReplicatedStorage.Knives:GetChildren()) do
+            if Thing:IsA("Tool") then
+                Thing.Parent = game.Players.LocalPlayer.Backpack
+            end
+        end
+    end
+)
 
-KillPlatform.MouseButton1Click:connect(function()
-	plr = game:service'Players'.LocalPlayer
-char = plr.Character
-root = char.HumanoidRootPart
-iszombie = false
- 
-platform = Instance.new('Part', workspace)
-platform.Size = Vector3.new(100,0,100)
-platform.Anchored = true
-platform.Position = Vector3.new(555,555,555)
-root.CFrame = platform.CFrame * CFrame.new(0,4,0)
- 
-if workspace:FindFirstChild(plr.Name) then
-   iszombie = false
-   warn'You are not a zombie!'
-else
-   iszombie = true
-   warn'You are a zombie!'
-end
- 
-wait(.5)
- 
-if not iszombie then
-   for _, a in pairs(workspace.enemies:children()) do
-       for _, b in pairs(a:children()) do
-           if b:IsA'Part' then
-               b.Anchored = true
-               b.CFrame = root.CFrame * CFrame.new(2,0,2)
-           end
-       end
-   end
-elseif iszombie then
-   for _, a in pairs(game:service'Players':GetPlayers()) do
-       if a.Character then
-           for _, b in pairs(a.Character:children()) do
-               if b:IsA'Part' and a.Name ~= plr.Name then
-                   b.Anchored = true
-                   b.CFrame =  root.CFrame * CFrame.new(2,0,2)
-               end
-           end
-       end
-   end
-end
-end)
+Guns.MouseButton1Click:connect(
+    function()
+        for _, Thing in pairs(game.ReplicatedStorage.Guns:GetChildren()) do
+            if Thing:IsA("Tool") then
+                Thing.Parent = game.Players.LocalPlayer.Backpack
+            end
+        end
+    end
+)
 
-Speed.MouseButton1Click:connect(function()
-	plr = game:service'Players'.LocalPlayer
-char = plr.Character
-hum = char:FindFirstChildOfClass'Humanoid'
+KillPlatform.MouseButton1Click:connect(
+    function()
+        plr = game:service "Players".LocalPlayer
+        char = plr.Character
+        root = char.HumanoidRootPart
+        iszombie = false
 
-hum.WalkSpeed = 60
-	
-end)
+        platform = Instance.new("Part", workspace)
+        platform.Size = Vector3.new(100, 0, 100)
+        platform.Anchored = true
+        platform.Position = Vector3.new(555, 555, 555)
+        root.CFrame = platform.CFrame * CFrame.new(0, 4, 0)
 
-Jump.MouseButton1Click:connect(function()
-	plr = game:service'Players'.LocalPlayer
-char = plr.Character
-hum = char:FindFirstChildOfClass'Humanoid'
+        if workspace:FindFirstChild(plr.Name) then
+            iszombie = false
+            warn "You are not a zombie!"
+        else
+            iszombie = true
+            warn "You are a zombie!"
+        end
 
-hum.JumpPower = 100
-end)
+        wait(.5)
 
-AutoFarm.MouseButton1Click:connect(function()
-	local groundDistance = 8
-local Player = game:GetService("Players").LocalPlayer
-local function getNearest()
-local nearest, dist = nil, 99999
-for _,v in pairs(game.Workspace.BossFolder:GetChildren()) do
-if(v:FindFirstChild("Head")~=nil)then
-local m =(Player.Character.Head.Position-v.Head.Position).magnitude
-if(m<dist)then
-dist = m
-nearest = v
-end
-end
-end
-for _,v in pairs(game.Workspace.enemies:GetChildren()) do
-if(v:FindFirstChild("Head")~=nil)then
-local m =(Player.Character.Head.Position-v.Head.Position).magnitude
-if(m<dist)then
-dist = m
-nearest = v
-end
-end
-end
-return nearest
-end
-_G.farm2 = true
-Player.Chatted:Connect(function(m)
-if(m==";autofarm false")then
-_G.farm2 = false
-elseif(m==";autofarm true")then
-_G.farm2 = true
-end
-end)
-_G.globalTarget = nil
-game:GetService("RunService").RenderStepped:Connect(function()
-if(_G.farm2==true)then
-local target = getNearest()
-if(target~=nil)then
-game:GetService("Workspace").CurrentCamera.CFrame = CFrame.new(game:GetService("Workspace").CurrentCamera.CFrame.p, target.Head.Position)
-Player.Character.HumanoidRootPart.CFrame = (target.HumanoidRootPart.CFrame * CFrame.new(0, groundDistance, 9))
-_G.globalTarget = target
-end
-end
-end)
-spawn(function()
-while wait() do
-game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
-game.Players.LocalPlayer.Character.Torso.Velocity = Vector3.new(0,0,0)
-end
-end)
-while wait() do
-if(_G.farm2==true and _G.globalTarget~=nil and _G.globalTarget:FindFirstChild("Head") and Player.Character:FindFirstChildOfClass("Tool"))then
-local target = _G.globalTarget
-game.ReplicatedStorage.Gun:FireServer({["Normal"] = Vector3.new(0, 0, 0), ["Direction"] = target.Head.Position, ["Name"] = Player.Character:FindFirstChildOfClass("Tool").Name, ["Hit"] = target.Head, ["Origin"] = target.Head.Position, ["Pos"] = target.Head.Position,})
-wait()
-end
-end
-end)
+        if not iszombie then
+            for _, a in pairs(workspace.enemies:children()) do
+                for _, b in pairs(a:children()) do
+                    if b:IsA "Part" then
+                        b.Anchored = true
+                        b.CFrame = root.CFrame * CFrame.new(2, 0, 2)
+                    end
+                end
+            end
+        elseif iszombie then
+            for _, a in pairs(game:service "Players":GetPlayers()) do
+                if a.Character then
+                    for _, b in pairs(a.Character:children()) do
+                        if b:IsA "Part" and a.Name ~= plr.Name then
+                            b.Anchored = true
+                            b.CFrame = root.CFrame * CFrame.new(2, 0, 2)
+                        end
+                    end
+                end
+            end
+        end
+    end
+)
 
-Btools.MouseButton1Click:connect(function()
-	loadstring(game:HttpGet("https://pastebin.com/raw/T0qaXjAR", true))()
-end)
+Speed.MouseButton1Click:connect(
+    function()
+        plr = game:service "Players".LocalPlayer
+        char = plr.Character
+        hum = char:FindFirstChildOfClass "Humanoid"
 
-Gravity.MouseButton1Click:connect(function()
-	game.Workspace.Gravity = 5
-end)
+        hum.WalkSpeed = 60
+    end
+)
+
+Jump.MouseButton1Click:connect(
+    function()
+        plr = game:service "Players".LocalPlayer
+        char = plr.Character
+        hum = char:FindFirstChildOfClass "Humanoid"
+
+        hum.JumpPower = 100
+    end
+)
+
+AutoFarm.MouseButton1Click:connect(
+    function()
+        local groundDistance = 8
+        local Player = game:GetService("Players").LocalPlayer
+        local function getNearest()
+            local nearest, dist = nil, 99999
+            for _, v in pairs(game.Workspace.BossFolder:GetChildren()) do
+                if (v:FindFirstChild("Head") ~= nil) then
+                    local m = (Player.Character.Head.Position - v.Head.Position).magnitude
+                    if (m < dist) then
+                        dist = m
+                        nearest = v
+                    end
+                end
+            end
+            for _, v in pairs(game.Workspace.enemies:GetChildren()) do
+                if (v:FindFirstChild("Head") ~= nil) then
+                    local m = (Player.Character.Head.Position - v.Head.Position).magnitude
+                    if (m < dist) then
+                        dist = m
+                        nearest = v
+                    end
+                end
+            end
+            return nearest
+        end
+        _G.farm2 = true
+        Player.Chatted:Connect(
+            function(m)
+                if (m == ";autofarm false") then
+                    _G.farm2 = false
+                elseif (m == ";autofarm true") then
+                    _G.farm2 = true
+                end
+            end
+        )
+        _G.globalTarget = nil
+        game:GetService("RunService").RenderStepped:Connect(
+            function()
+                if (_G.farm2 == true) then
+                    local target = getNearest()
+                    if (target ~= nil) then
+                        game:GetService("Workspace").CurrentCamera.CFrame =
+                            CFrame.new(game:GetService("Workspace").CurrentCamera.CFrame.p, target.Head.Position)
+                        Player.Character.HumanoidRootPart.CFrame =
+                            (target.HumanoidRootPart.CFrame * CFrame.new(0, groundDistance, 9))
+                        _G.globalTarget = target
+                    end
+                end
+            end
+        )
+        spawn(
+            function()
+                while wait() do
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+                    game.Players.LocalPlayer.Character.Torso.Velocity = Vector3.new(0, 0, 0)
+                end
+            end
+        )
+        while wait() do
+            if
+                (_G.farm2 == true and _G.globalTarget ~= nil and _G.globalTarget:FindFirstChild("Head") and
+                    Player.Character:FindFirstChildOfClass("Tool"))
+             then
+                local target = _G.globalTarget
+                game.ReplicatedStorage.Gun:FireServer(
+                    {
+                        ["Normal"] = Vector3.new(0, 0, 0),
+                        ["Direction"] = target.Head.Position,
+                        ["Name"] = Player.Character:FindFirstChildOfClass("Tool").Name,
+                        ["Hit"] = target.Head,
+                        ["Origin"] = target.Head.Position,
+                        ["Pos"] = target.Head.Position
+                    }
+                )
+                wait()
+            end
+        end
+    end
+)
+
+Btools.MouseButton1Click:connect(
+    function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/T0qaXjAR", true))()
+    end
+)
+
+Gravity.MouseButton1Click:connect(
+    function()
+        game.Workspace.Gravity = 5
+    end
+)
