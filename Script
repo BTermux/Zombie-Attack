@@ -39,6 +39,7 @@ Main.BackgroundTransparency = 0.15000000596046
 Main.BorderSizePixel = 0
 Main.Position = UDim2.new(0.794708014, 0, 0, 0)
 Main.Size = UDim2.new(0.191605836, 0, 1, 0)
+Main.Draggable = true
 
 TextLabel.Parent = Main
 TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
